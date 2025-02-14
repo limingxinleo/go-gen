@@ -1,9 +1,10 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/limingxinleo/go-gen/config"
 	"github.com/spf13/cobra"
+	"log"
+	"os"
 )
 
 // configCreateCmd represents the configCreate command
@@ -12,8 +13,15 @@ var configCreateCmd = &cobra.Command{
 	Short: "Create config in current project",
 	Long:  `Create config in current project`,
 	Run: func(cmd *cobra.Command, args []string) {
-		conf := config.GetCodeConfig("dao")
-		fmt.Println(conf)
+		dir, err := os.Getwd()
+		if err != nil {
+			log.Fatalf("failed to get current directory: %v", err)
+		}
+
+		err = config.CreateConfigDir(dir, false)
+		if err != nil {
+			log.Fatalf("failed to init config: %v", err)
+		}
 	},
 }
 
