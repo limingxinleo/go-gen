@@ -10,6 +10,14 @@
       "params": [
         "name"
       ]
+    },
+    "service": {
+      "name": "service",
+      "path": "app/service",
+      "stub": "stub/service.stub",
+      "params": [
+        "name"
+      ]
     }
   }
 }
