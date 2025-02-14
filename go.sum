@@ -1,4 +1,10 @@
 github.com/cpuguy83/go-md2man/v2 v2.0.4/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
+github.com/hyperf/go-stringable v1.0.1 h1:+dkv8xnfYNcQYnxgo7O+dbEmDlq9/J1Qo8QcJ0d5eDI=
+github.com/hyperf/go-stringable v1.0.1/go.mod h1:DHNHleWPulLs6tELa72t32q5vKL7/7em5NJae8Pgm2w=
+github.com/hyperf/go-stringable v1.0.2-0.20250214084317-5b817e95d588 h1:/jciEHNjDWk/s7jWA8NQgBtPOttkowhnDZPY+wZtMpg=
+github.com/hyperf/go-stringable v1.0.2-0.20250214084317-5b817e95d588/go.mod h1:DHNHleWPulLs6tELa72t32q5vKL7/7em5NJae8Pgm2w=
+github.com/hyperf/go-stringable v1.0.2 h1:mLjqdTexhFT//NQKMSJtT0xRUTH/YchoszeExW288Fg=
+github.com/hyperf/go-stringable v1.0.2/go.mod h1:DHNHleWPulLs6tELa72t32q5vKL7/7em5NJae8Pgm2w=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=

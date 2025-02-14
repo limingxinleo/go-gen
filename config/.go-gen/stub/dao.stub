@@ -5,13 +5,13 @@ import (
 	"context"
 )
 
-type %name% struct {
+type {name} struct {
 	sqlConn sqlx.SqlConn
 	ctx     context.Context
 }
 
-func New%name%(sqlConn sqlx.SqlConn, ctx context.Context) *%name% {
-	return &%name%{
+func New{name}(sqlConn sqlx.SqlConn, ctx context.Context) *{name} {
+	return &{name}{
 		sqlConn: sqlConn,
 		ctx:     ctx,
 	}
