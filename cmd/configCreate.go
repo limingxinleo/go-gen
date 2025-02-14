@@ -18,7 +18,12 @@ var configCreateCmd = &cobra.Command{
 			log.Fatalf("failed to get current directory: %v", err)
 		}
 
-		err = config.CreateConfigDir(dir, false)
+		force, err := cmd.Flags().GetBool("force")
+		if err != nil {
+			log.Fatalf("failed to read falgs: %v", err)
+		}
+
+		err = config.CreateConfigDir(dir, force)
 		if err != nil {
 			log.Fatalf("failed to init config: %v", err)
 		}
@@ -27,4 +32,6 @@ var configCreateCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(configCreateCmd)
+
+	configCreateCmd.Flags().BoolP("force", "f", false, "Whether to overwrite existing config")
 }

@@ -44,19 +44,22 @@ func CreateConfigDir(dir string, force bool) error {
 		return errors.New(fmt.Sprintf("%s already exists", configPath))
 	}
 
-	defaultPath := path.Join(dir, dirName, configName)
-	bt, _ = os.ReadFile(defaultPath)
+	defaultPath := path.Join(dirName, configName)
+	bt, _ = defaultConfigDir.ReadFile(defaultPath)
+
+	_ = os.MkdirAll(path.Join(dir, dirName), 0755)
 
 	err = os.WriteFile(configPath, bt, 0644)
 	if err != nil {
-		return errors.New(fmt.Sprintf("create config.json failed, %v", err))
+		return errors.New(fmt.Sprintf("create %s failed, %v", configName, err))
 	}
 
 	initDefaultConfig()
 
 	for _, stub := range conf.Stubs {
 		codeStub := stub.CodeStub
-		err = os.WriteFile(path.Join(configPath, stub.Stub), []byte(codeStub), 0644)
+		_ = os.MkdirAll(path.Dir(path.Join(dir, dirName, stub.Stub)), 0755)
+		err = os.WriteFile(path.Join(dir, dirName, stub.Stub), []byte(codeStub), 0644)
 		if err != nil {
 			return errors.New(fmt.Sprintf("create stub failed, %v", err))
 		}
