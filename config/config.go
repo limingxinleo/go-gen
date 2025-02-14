@@ -1,34 +1,45 @@
 package config
 
 import (
+	"embed"
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 	"os/user"
 	"path"
 )
 
-type CodeConfig struct {
+type CodeStub struct {
 	Name   string   `json:"name"`
 	Path   string   `json:"path"`
 	Stub   string   `json:"stub"`
 	Params []string `json:"params"`
 }
 
-var list map[string]*CodeConfig
-var dirName = ".go-gen"
-
-func init() {
-	list = make(map[string]*CodeConfig)
+type Config struct {
+	Name        string               `json:"name"`
+	Description string               `json:"description"`
+	Github      string               `json:"github"`
+	Stubs       map[string]*CodeStub `json:"stubs"`
 }
 
-func GetCodeConfig(name string) *CodeConfig {
-	if len(list) == 0 {
-		initList()
+var conf *Config
+var dirName = ".go-gen"
+var configName = "config.json"
+
+//go:embed .go-gen
+var defaultConfigDir embed.FS
+
+func init() {
+	conf = &Config{}
+}
+
+func GetCodeConfig(name string) *CodeStub {
+	if len(conf.Stubs) == 0 {
+		initConfigStubs()
 	}
 
-	res, ok := list[name]
+	res, ok := conf.Stubs[name]
 	if !ok {
 		log.Fatalf("code config %s not exist", name)
 	}
@@ -37,7 +48,7 @@ func GetCodeConfig(name string) *CodeConfig {
 }
 
 func initStubs(dir string) {
-	for _, config := range list {
+	for _, config := range conf.Stubs {
 		bt, err := os.ReadFile(path.Join(dir, dirName, config.Stub))
 		if err != nil {
 			log.Fatalf("Read stub config file failed: %v", err)
@@ -47,31 +58,50 @@ func initStubs(dir string) {
 	}
 }
 
-func initList() {
+func initConfig(dir string) error {
+	bt, err := os.ReadFile(path.Join(dir, dirName, configName))
+	if err != nil {
+		return err
+	}
+
+	err = json.Unmarshal(bt, &conf)
+	if err != nil {
+		log.Fatalf("Error parsing config.json: %v", err)
+	}
+
+	initStubs(dir)
+	return nil
+}
+
+func initConfigStubs() {
 	currentDir, err := os.Getwd()
 	if err == nil {
-		// 打印当前工作目录
-		bt, err := os.ReadFile(path.Join(currentDir, dirName, "config.json"))
+		err = initConfig(currentDir)
 		if err == nil {
-			err = json.Unmarshal(bt, &list)
-			if err != nil {
-				log.Fatalf("Error parsing config.json: %v", err)
-			}
-
-			initStubs(currentDir)
-
 			return
 		}
 	}
 
 	u, err := user.Current()
 	if err == nil {
-
+		err = initConfig(u.HomeDir)
+		if err == nil {
+			return
+		}
 	}
+
+	bt, err := defaultConfigDir.ReadFile(path.Join(dirName, configName))
+	err = json.Unmarshal(bt, &conf)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatalf("Error parsing config.json: %v", err)
 	}
 
-	fmt.Println(u.HomeDir)
+	for _, config := range conf.Stubs {
+		bt, err := defaultConfigDir.ReadFile(path.Join(dirName, config.Stub))
+		if err != nil {
+			log.Fatalf("Read stub config file failed: %v", err)
+		}
+
+		config.Stub = string(bt)
+	}
 }
