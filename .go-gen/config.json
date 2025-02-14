@@ -1,0 +1,10 @@
+{
+  "dao": {
+    "name": "dao",
+    "path": "app/dao",
+    "stub": "stub/dao.stub",
+    "params": [
+      "name"
+    ]
+  }
+}
