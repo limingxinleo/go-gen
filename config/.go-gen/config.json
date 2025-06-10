@@ -18,6 +18,15 @@
       "params": [
         "name"
       ]
+    },
+    "file": {
+      "name": "file",
+      "stub": "stub/file.stub",
+      "params": [
+        "name",
+        "path",
+        "package"
+      ]
     }
   }
 }

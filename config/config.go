@@ -5,10 +5,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/samber/lo"
 	"log"
 	"os"
 	"os/user"
 	"path"
+	"strings"
 )
 
 type CodeStub struct {
@@ -17,6 +19,27 @@ type CodeStub struct {
 	Stub     string   `json:"stub"`
 	CodeStub string   `json:"code_stub"`
 	Params   []string `json:"params"`
+}
+
+func (c *CodeStub) LoadParams(params map[string]string) (map[string]string, error) {
+	for _, key := range c.Params {
+		_, ok := params[key]
+		if !ok {
+			if key == "package" {
+				value, ok := params["path"]
+				if !ok || value == "" {
+					return params, errors.New(fmt.Sprintf("The param %s is required!", key))
+				}
+
+				seps := strings.Split(value, "/")
+				params["package"] = lo.LastOrEmpty(seps)
+			} else {
+				return params, errors.New(fmt.Sprintf("The param %s is required!", key))
+			}
+		}
+
+	}
+	return params, nil
 }
 
 type Config struct {

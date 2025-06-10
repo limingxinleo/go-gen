@@ -40,15 +40,25 @@ go-gen gen dao name=UserDao
 
 		stub := config.GetCodeConfig(key)
 		code := stub.CodeStub
-		params := initParams(args[1:])
-
-		for key, value := range params {
-			code = strings.ReplaceAll(code, fmt.Sprintf("{%s}", key), value)
+		params, err := stub.LoadParams(initParams(args[1:]))
+		if err != nil {
+			log.Fatal(err)
 		}
 
 		name, ok := params["name"]
 		if !ok {
 			log.Fatal("The params name=xxx is required")
+		}
+
+		if stub.Path == "" {
+			stub.Path, ok = params["path"]
+			if !ok {
+				log.Fatal("The params path=xxx is required")
+			}
+		}
+
+		for key, value := range params {
+			code = strings.ReplaceAll(code, fmt.Sprintf("{%s}", key), value)
 		}
 
 		file := path.Join(dir, stub.Path, stringable.Snake(name)+".go")
