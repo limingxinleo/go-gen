@@ -7,14 +7,14 @@ import (
 )
 
 type {name} struct {
-	logx.Logger
+	log    logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
 func New{name}(ctx context.Context, svcCtx *svc.ServiceContext) *{name} {
 	return &{name}{
-		Logger: logx.WithContext(ctx),
+		log:    logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
