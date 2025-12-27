@@ -5,12 +5,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/samber/lo"
 	"log"
 	"os"
 	"os/user"
 	"path"
 	"strings"
+
+	"github.com/limingxinleo/go-gen/src/module"
+	"github.com/samber/lo"
 )
 
 type CodeStub struct {
@@ -21,7 +23,7 @@ type CodeStub struct {
 	Params   []string `json:"params"`
 }
 
-func (c *CodeStub) LoadParams(params map[string]string) (map[string]string, error) {
+func (c *CodeStub) LoadParams(params map[string]string, dir string) (map[string]string, error) {
 	for _, key := range c.Params {
 		_, ok := params[key]
 		if !ok {
@@ -33,6 +35,8 @@ func (c *CodeStub) LoadParams(params map[string]string) (map[string]string, erro
 
 				seps := strings.Split(value, "/")
 				params["package"] = lo.LastOrEmpty(seps)
+			} else if key == "module" {
+				params["module"] = module.NewReader().Read(path.Join(dir, "go.mod"))
 			} else {
 				return params, errors.New(fmt.Sprintf("The param %s is required!", key))
 			}

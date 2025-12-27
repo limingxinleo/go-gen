@@ -16,7 +16,8 @@
       "path": "app/service",
       "stub": "stub/service.stub",
       "params": [
-        "name"
+        "name",
+        "module"
       ]
     },
     "file": {

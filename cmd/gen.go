@@ -5,13 +5,14 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/hyperf/go-stringable/stringable"
-	"github.com/limingxinleo/go-gen/config"
-	"github.com/spf13/cobra"
 	"log"
 	"os"
 	"path"
 	"strings"
+
+	"github.com/hyperf/go-stringable/stringable"
+	"github.com/limingxinleo/go-gen/config"
+	"github.com/spf13/cobra"
 )
 
 // genCmd represents the gen command
@@ -40,7 +41,7 @@ go-gen gen dao name=UserDao
 
 		stub := config.GetCodeConfig(key)
 		code := stub.CodeStub
-		params, err := stub.LoadParams(initParams(args[1:]))
+		params, err := stub.LoadParams(initParams(args[1:]), dir)
 		if err != nil {
 			log.Fatal(err)
 		}
