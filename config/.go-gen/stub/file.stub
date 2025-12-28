@@ -1,8 +1,13 @@
 package {package}
 
+import "context"
+
 type {name} struct {
+    ctx    context.Context
 }
 
-func New{name}() *{name} {
-	return &{name}{}
+func New{name}(ctx context.Context) *{name} {
+	return &{name}{
+	    ctx: ctx
+	}
 }
