@@ -3,11 +3,11 @@ package {package}
 import "context"
 
 type {name} struct {
-    ctx    context.Context
+    ctx context.Context
 }
 
 func New{name}(ctx context.Context) *{name} {
 	return &{name}{
-	    ctx: ctx
+	    ctx: ctx,
 	}
 }
