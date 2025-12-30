@@ -9,6 +9,8 @@ github.com/hyperf/go-stringable v1.0.2 h1:mLjqdTexhFT//NQKMSJtT0xRUTH/YchoszeExW
 github.com/hyperf/go-stringable v1.0.2/go.mod h1:DHNHleWPulLs6tELa72t32q5vKL7/7em5NJae8Pgm2w=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
+github.com/kylelemons/godebug v1.1.0 h1:RPNrshWIDI6G2gRW9EHilWtl7Z6Sb1BR0xunSBf0SNc=
+github.com/kylelemons/godebug v1.1.0/go.mod h1:9/0rRGxNHcop5bhtWyNeEfOS8JIWk580+fNqagV/RAw=
 github.com/marhaupe/json2struct v1.9.3 h1:tX69M8j9xYisAk/C23Iqz3jY6J+JI89XSBSCQ/X+Bcs=
 github.com/marhaupe/json2struct v1.9.3/go.mod h1:Qlp6+nCNP6rb9pOUHxr3N8VVdJ9v2qqtfqZMMXcm328=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
