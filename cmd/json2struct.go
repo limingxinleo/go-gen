@@ -77,6 +77,8 @@ func Run(flags Json2StructFlags) {
 		os.Exit(3)
 	}
 
+	output = json2struct.NewAstReader().Run(output)
+
 	fmt.Println(output)
 
 	if flags.ShouldUseClipboard {
