@@ -10,7 +10,10 @@ require (
 )
 
 require (
+	github.com/atotto/clipboard v0.1.4 // indirect
+	github.com/dave/jennifer v1.7.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
+	github.com/marhaupe/json2struct v1.9.3 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	golang.org/x/text v0.22.0 // indirect
 )
