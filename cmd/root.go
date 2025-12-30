@@ -19,7 +19,7 @@ var rootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if rootCmd.Version == "" {
-		rootCmd.Version = "v1.3.2"
+		rootCmd.Version = "v1.3.3"
 	}
 
 	err := rootCmd.Execute()
