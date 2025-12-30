@@ -6,12 +6,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const Version = "1.2.1"
+var version string
 
 var rootCmd = &cobra.Command{
-	Use:   "go-gen",
-	Short: "A golang code generator",
-	Long:  `A golang code generator`,
+	Use:     "go-gen",
+	Short:   "A golang code generator",
+	Long:    `A golang code generator`,
+	Version: version,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

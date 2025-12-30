@@ -1,0 +1,25 @@
+OUTPUT?="go-gen"
+VERSION=$(shell git describe --tags)
+LDFLAGS="-X github.com/limingxinleo/go-gen/cmd.version=$(VERSION)"
+
+.PHONY: build install test testrace clean coverage
+
+build:
+	CGO_ENABLED=0 go build -o $(OUTPUT) -ldflags=$(LDFLAGS)
+
+install:
+	CGO_ENABLED=0 go install -ldflags=$(LDFLAGS)
+
+test:
+	go test ./...
+
+testrace:
+	go test -race ./...
+
+clean:
+	rm -rf dist
+
+coverage:
+	go test ./... -coverprofile cover.out
+	go tool cover -html=cover.out -o cover.html
+	rm cover.out
