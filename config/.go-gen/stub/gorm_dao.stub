@@ -1,0 +1,22 @@
+package dao
+
+import (
+	"context"
+
+	"github.com/zeromicro/go-zero/core/logx"
+	"gorm.io/gorm"
+)
+
+type {name} struct {
+	db  *gorm.DB
+	ctx context.Context
+	log logx.Logger
+}
+
+func New{name}(db *gorm.DB, ctx context.Context) *{name} {
+	return &{name}{
+		db:  db,
+		ctx: ctx,
+		log: logx.WithContext(ctx),
+	}
+}

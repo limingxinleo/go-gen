@@ -11,6 +11,14 @@
         "name"
       ]
     },
+    "gorm_dao": {
+      "name": "gorm_dao",
+      "path": "app/dao",
+      "stub": "stub/gorm_dao.stub",
+      "params": [
+        "name"
+      ]
+    },
     "service": {
       "name": "service",
       "path": "app/service",
